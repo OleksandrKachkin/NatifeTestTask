@@ -7,14 +7,8 @@
 
 import Foundation
 
-//protocol PostManagerDelegate {
-//  // Метод обновляет интерфейс
-//  func didUpdatePost(_ postManager: PostManager, post: PostModel)
-//  // Метод обрабатывает ошибки
-//  func didFailWithError(error: Error)
-//}
-
 class PostManager {
+  // Singelton
   static let shared = PostManager()
   
   struct Constant {
@@ -39,7 +33,6 @@ class PostManager {
     
     let task = URLSession.shared.dataTask(with: url) { data, _, error  in
       if let error = error {
-//        print(error)
         completion(.failure(error))
       }
       else if let safeData = data {
@@ -56,79 +49,3 @@ class PostManager {
     task.resume()
   }
 }
-//  
-//  func performRequest(with urlString: String) {
-//    
-//    if let url = URL(string: urlString) {
-//      let session = URLSession(configuration: .default)
-//      
-//      let task = session.dataTask(with: url) { (data, response, error) in
-//        if error != nil {
-//          print(error!)
-//          return
-//        }
-//        
-//        if let safeData = data {
-//          do {
-//            let result = try JSONDecoder().decode(PostData.self, from: safeData)
-//            print("Articles: \(result.posts.count)")
-//          }
-//          
-////          if let post = self.parseJSON(safeData) {
-////            self.delegate?.didUpdatePost(self, post: post)
-////          }
-//        }
-//      }
-//      
-//      task.resume()
-//      print(url)
-//    }
-//  }
-//  
-//  
-//  func parseJSON(_ postData: Data) -> PostModel? {
-//    
-//    let decoder = JSONDecoder()
-//    
-//    do {
-//      let decodedData = try decoder.decode(PostData.self, from: postData)
-//      print(decodedData.posts[0].title)
-//      let id = decodedData.posts[0].postID
-//      let title = decodedData.posts[id].title
-//      let previewText = decodedData.posts[id].previewText
-//      let likes = decodedData.posts[id].likesCount
-//      let time = decodedData.posts[id].timeshamp
-//      let post = PostModel(title: title, subtitle: subtitle, likes: likes, time: time)
-//      return post
-//      
-//    } catch {
-//      delegate?.didFailWithError(error: error)
-//      print(error)
-//      return nil
-//    }
-//  }
-//  
-//}
-
-
-// Models
-//
-//struct APIResponse: Codable {
-//  let posts: [Post]
-//}
-//
-//struct Post: Codable {
-//  let postID: Int
-//  let timeshamp: Int
-//  let title: String
-//  let previewText: String
-//  let likesCount: Int
-//  
-//  enum CodingKeys: String, CodingKey {
-//    case postID = "postId"
-//    case timeshamp
-//    case title
-//    case previewText = "preview_text"
-//    case likesCount = "likes_count"
-//  }
-//}

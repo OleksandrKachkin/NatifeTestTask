@@ -7,10 +7,18 @@
 
 import UIKit
 
-class MainViewController: UITableViewController {
+class MainViewController: UIViewController {
+  
+  let tableView: UITableView = {
+    let table = UITableView()
+    table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.reuseId)
+    return table
+  }()
+  
+  
   
   private var news = [Post]()
-  private var postModels = [PostModel]()
+  private var postModels = [CellModel]()
   
   
   
@@ -18,19 +26,23 @@ class MainViewController: UITableViewController {
     super.viewDidLoad()
     
     title = "News"
+    view.addSubview(tableView)
     tableView.delegate = self
     tableView.dataSource = self
     view.backgroundColor = .systemBackground
     
-    // Mark - вопрос 1 - куда лучше размещать запрос данныхБ
+    // Mark - вопрос 1 - куда лучше размещать запрос данных
     PostManager.shared.getNews { [weak self] result in
       switch result {
       case .success(let posts):
         self?.news = posts
         self?.postModels = posts.compactMap({
-//          PostModel(title: $0.title, previewText: $0.previewText,
-          PostModel(title: <#T##String#>, previewText: <#T##String#>, likes: <#T##Int#>, time: <#T##Int#>)
+          CellModel(title: $0.title, previewText: $0.previewText)
         })
+        //        self?.postModels = posts.compactMap({
+        //          PostModel(title: $0.title, previewText: $0.previewText,
+        //          CellModel(title: <#T##String#>, previewText: <#T##String#>, likes: <#T##Int#>, time: <#T##Int#>)
+        //        })
         
         DispatchQueue.main.async {
           self?.tableView.reloadData()
@@ -39,22 +51,38 @@ class MainViewController: UITableViewController {
       }
     }
   }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    tableView.frame = view.bounds
+  }
+}
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   
-  // MARK: - UITableViewDelegate, UITableViewDataSource
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModels.count
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return postModels.count
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.reuseId,for: indexPath) as? NewsTableViewCell else { fatalError() }
-    cell.configure(with: viewModels[indexPath.row])
+    cell.configure(with: postModels[indexPath.row])
     
     return cell
   }
   
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 200
+  }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    
+    // открыть новый ВК
+    // let vc =
+  }
 }
 

@@ -12,15 +12,15 @@ struct APIResponse: Codable {
 }
 
 struct Post: Codable {
-  let postID: Int
-  let timeshamp: Int
+  let postId: Int
+  let timestamp: Int
   let title: String
-  let likesCount: Int
   let previewText: String
+  let likesCount: Int
   
   enum CodingKeys: String, CodingKey {
-    case postID = "postId"
-    case timeshamp
+    case postId
+    case timestamp = "timeshamp"
     case title
     case previewText = "preview_text"
     case likesCount = "likes_count"
