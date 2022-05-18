@@ -9,23 +9,20 @@ import UIKit
 
 class MainViewController: UIViewController {
   
-  let tableView: UITableView = {
+  private let tableView: UITableView = {
     let table = UITableView()
-    table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.reuseId)
+    table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
     return table
   }()
   
-  
-  
   private var news = [Post]()
   private var postModels = [CellModel]()
-  
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     title = "News"
+//    navigationController?.navigationBar.prefersLargeTitles = true
     view.addSubview(tableView)
     tableView.delegate = self
     tableView.dataSource = self
@@ -47,14 +44,18 @@ class MainViewController: UIViewController {
         DispatchQueue.main.async {
           self?.tableView.reloadData()
         }
-      case .failure(let error): print(error)
+      case .failure(let error):
+        print(error)
       }
     }
   }
   
+  
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     tableView.frame = view.bounds
+//    tableView.frame = CGRect.init(origin: .zero, size: CGSize(width: 200, height: 200))
   }
 }
 
@@ -68,14 +69,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.reuseId,for: indexPath) as? NewsTableViewCell else { fatalError() }
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell else { fatalError() }
     cell.configure(with: postModels[indexPath.row])
     
     return cell
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 200
+    return 220
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
