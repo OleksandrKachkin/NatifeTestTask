@@ -34,12 +34,8 @@ class MainViewController: UIViewController {
       case .success(let posts):
         self?.news = posts
         self?.postModels = posts.compactMap({
-          CellModel(title: $0.title, previewText: $0.previewText)
+          CellModel(title: $0.title, previewText: $0.previewText, likes: $0.likesCount, time: $0.timestamp)
         })
-        //        self?.postModels = posts.compactMap({
-        //          PostModel(title: $0.title, previewText: $0.previewText,
-        //          CellModel(title: <#T##String#>, previewText: <#T##String#>, likes: <#T##Int#>, time: <#T##Int#>)
-        //        })
         
         DispatchQueue.main.async {
           self?.tableView.reloadData()

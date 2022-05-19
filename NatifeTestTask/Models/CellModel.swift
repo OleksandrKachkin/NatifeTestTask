@@ -11,6 +11,6 @@ struct CellModel {
   
   let title: String
   let previewText: String
-//  let likes: Int
-//  let time: Int
+  let likes: Int
+  let time: Int
 }

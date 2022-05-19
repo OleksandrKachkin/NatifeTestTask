@@ -99,29 +99,16 @@ class NewsTableViewCell: UITableViewCell {
     button.translatesAutoresizingMaskIntoConstraints = false
     button.setTitle("Expand", for: .normal)
     button.setTitleColor(.white, for: .normal)
-//    button.titleLabel?.font = UIFont.semiBold(24)
     button.titleLabel?.font = .systemFont(ofSize: 20, weight: .light)
     button.backgroundColor = #colorLiteral(red: 0.2775951028, green: 0.3229554296, blue: 0.369166106, alpha: 1)
     button.layer.cornerRadius = 8
-//    button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//    button.layer.borderWidth = 4
     button.addTarget(self, action: #selector(expandBottonAction), for: .touchUpInside)
     return button
   }()
   
-  
-  //  Написать ЮАЙ программно.
-  // Добавить likesCountLabel и timestampLabel
-  
   // MARK: - Lifecycle
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-//    contentView.addSubview(newsTitleLabel)
-//    contentView.addSubview(previewLabel)
-//    addSubview(bottomStackView)
-//    addSubview(expandBotton)
-
-    
     
     overlayFirstLayer()
     overlaySecondLayer()
@@ -139,7 +126,6 @@ class NewsTableViewCell: UITableViewCell {
     newsTitleLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 10).isActive = true
     newsTitleLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -10).isActive = true
     newsTitleLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
-//    newsTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
     
     // previewLabel constraints
     previewLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 8).isActive = true
@@ -170,8 +156,6 @@ class NewsTableViewCell: UITableViewCell {
     postView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
   }
   
-  
-  
   required init?(coder: NSCoder) {
     fatalError()
   }
@@ -190,50 +174,25 @@ class NewsTableViewCell: UITableViewCell {
     addSubview(expandBotton)
   }
   
-  //MARK: - View setup
-  func setupConstraints() {
-    
-    
-  }
   // MARK: - Actions
-  
   @objc func expandBottonAction() {
     
   }
-  
-  
-  
-//    newsTitleLabel.frame = CGRect(
-//      x: 10,
-//      y: 0,
-//      width: contentView.frame.size.width - 10,
-//      height: 70
-//    )
-//
-//    previewLabel.frame = CGRect(
-//      x: 10,
-//      y: 70,
-//      width: contentView.frame.size.width - 10,
-//      height: contentView.frame.size.height / 2
-//    )
-  
-    
-    // Добавить вьюшки Лайки и Время
   
   
   override func prepareForReuse() {
     super.prepareForReuse()
     newsTitleLabel.text = nil
     previewLabel.text = nil
+    likesCountLabel.text = nil
+    timestampLabel.text = nil
   }
   
   func configure(with cellModel: CellModel) {
     newsTitleLabel.text = cellModel.title
     previewLabel.text = cellModel.previewText
-    
-    // likesImageView будет статическим, без изменений
-    // Нужно добавить likesCountLabel и timestampLabel
-    
+    likesCountLabel.text = String(cellModel.likes)
+    timestampLabel.text = String(cellModel.time)
   }
 }
 
