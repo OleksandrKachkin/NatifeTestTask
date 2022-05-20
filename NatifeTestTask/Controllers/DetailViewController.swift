@@ -12,38 +12,45 @@ class DetailViewController: UIViewController {
   
   // MARK: - Properties
   
+  var newsTitle = ""
+  var newsText = ""
+  var likes = ""
+  var date = ""
   
+  var height = UIScreen.main.bounds.height / 2
   
   
   // MARK: - Views
   
-  // Если новость будет большая, то пользователь будет скролить
-  let scrollView = UIScrollView()
-  
-  private let postImageView: UIImageView = {
+  // Картинка в верхней части экрана
+  private let imageView: UIImageView = {
     let image = UIImageView(image: UIImage(named: "postImageView"))
-    image.contentMode = .scaleAspectFit
-    image.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+    image.contentMode = .scaleToFill
     return image
   }()
   
-  private let postTitleLabel: UILabel = {
+  // Нижняя часть экрана
+  let postView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private let newsTitleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 0
     label.font = .systemFont(ofSize: 32, weight: .regular)
     label.textAlignment = .left
-    label.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
     return label
   }()
   
-  private let postTextLabel: UILabel = {
+  private let previewLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 0
     label.font = .systemFont(ofSize: 16, weight: .regular)
     label.textAlignment = .left
-    label.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
     return label
   }()
   
@@ -52,7 +59,6 @@ class DetailViewController: UIViewController {
     image.tintColor = .red
     image.contentMode = .scaleAspectFit
     image.frame = .init(x: 0, y: 0, width: 20, height: 20)
-    image.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
     return image
   }()
   
@@ -61,7 +67,6 @@ class DetailViewController: UIViewController {
     label.translatesAutoresizingMaskIntoConstraints = false
     label.font = .systemFont(ofSize: 16, weight: .light)
     label.textAlignment = .left
-    label.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
     return label
   }()
   
@@ -75,74 +80,75 @@ class DetailViewController: UIViewController {
     return stack
   }()
   
-  private let dayLabel: UILabel = {
+  private let timestampLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.font = .systemFont(ofSize: 16, weight: .light)
     label.textAlignment = .right
-    label.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
     return label
   }()
   
-  lazy var bottomStackView: UIStackView = {
-    let stack = UIStackView(arrangedSubviews: [likesStackView, dayLabel])
+  lazy var stackView: UIStackView = {
+    let stack = UIStackView(arrangedSubviews: [imageView, postView])
     stack.translatesAutoresizingMaskIntoConstraints = false
-    stack.spacing = 4
-    stack.axis = .horizontal
-    stack.alignment = .fill
-    stack.distribution = .fillProportionally
+    stack.axis = .vertical
     return stack
   }()
   
-  lazy var stackView: UIStackView = {
-      let stack = UIStackView(arrangedSubviews: [postImageView, postTitleLabel, postTextLabel, bottomStackView])
-      stack.spacing = 20
-      stack.axis = .vertical
-      stack.alignment = .center
-      stack.translatesAutoresizingMaskIntoConstraints = false
-      return stack
-  }()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupViews()
-    setupScrollView()
+    title = "Natife Actual News"
+    view.backgroundColor = .white
+    
+    newsTitleLabel.text = newsTitle
+    previewLabel.text = newsText
+    likesCountLabel.text = likes
+    timestampLabel.text = date
+    
+    setupPostView()
     setupConstraints()
   }
+
   
-  func setupViews(){
-    title = "Natife News"
-    view.addSubview(scrollView)
+  func setupPostView(){
+    postView.addSubview(newsTitleLabel)
+    postView.addSubview(previewLabel)
+    postView.addSubview(likesStackView)
+    postView.addSubview(timestampLabel)
     
-//    let backBarButtonItem = UIBarButtonItem(title: "← Назад", style: .done, target: self, action: #selector(dismissButtonAction))
-//    backBarButtonItem.tintColor = .black
-//    navigationItem.leftBarButtonItem = backBarButtonItem
+    // newsTitleLabel constraints
+    newsTitleLabel.topAnchor.constraint(equalTo: postView.topAnchor, constant: 20).isActive = true
+    newsTitleLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 20).isActive = true
+    newsTitleLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -20).isActive = true
     
-  }
-  
-  func setupScrollView(){
-    scrollView.addSubview(stackView)
-    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    // previewLabel constraints
+    previewLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 20).isActive = true
+    previewLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 20).isActive = true
+    previewLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -20).isActive = true
+    
+    // likesStackView constraints
+    likesStackView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 20).isActive = true
+    likesStackView.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 15).isActive = true
+    likesStackView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    
+    // timestampLabel constraints
+    timestampLabel.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 20).isActive = true
+    timestampLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -15).isActive = true
+    timestampLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
   }
   
   func setupConstraints(){
-    scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-    scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    view.addSubview(stackView)
+
+    stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+    stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+    stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+    stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     
-    stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-    stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 5/6).isActive = true
-    stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-    stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
   }
-  
-  @objc func dismissButtonAction(){
-      self.navigationController?.popToRootViewController(animated: true)
-  }
-  
 }
 
 

@@ -15,10 +15,12 @@ class MainViewController: UIViewController {
   private var postModels = [CellModel]()
   private var ascendingSorting = true
   private var expandedIndexSet : IndexSet = []
+//  var buttonTitle = ["Expand", "Collapse"]
   
   //MARK: - Views
+  
   private let segmentedControl: UISegmentedControl = {
-    let sc = UISegmentedControl(items: ["Date", "Likes"])
+    let sc = UISegmentedControl(items: ["Likes", "Date"])
     sc.selectedSegmentIndex = 0
     sc.selectedSegmentTintColor = .systemGray
     sc.addTarget(self, action: #selector(segmentedControlAction(_:)), for: .touchUpInside)
@@ -36,12 +38,8 @@ class MainViewController: UIViewController {
     stack.translatesAutoresizingMaskIntoConstraints = false
     stack.spacing = 4
     stack.axis = .vertical
-    //    stack.alignment = .fill
-    //    stack.distribution = .fill
     return stack
   }()
-  
-  
   
   lazy var rightButton: UIButton = {
     let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -80,11 +78,11 @@ class MainViewController: UIViewController {
   
   @objc func sortButtonAction() {
     ascendingSorting.toggle()
-    if ascendingSorting {
-      rightButton.setBackgroundImage(UIImage(named: "AZ"), for: .normal)
-    } else {
-      rightButton.setBackgroundImage(UIImage(named: "ZA"), for: .normal)
-    }
+//    if ascendingSorting {
+//      rightButton.setBackgroundImage(UIImage(named: "ZA"), for: .normal)
+//    } else {
+//      rightButton.setBackgroundImage(UIImage(named: "AZ"), for: .normal)
+//    }
     
     sorting()
   }
@@ -104,7 +102,6 @@ class MainViewController: UIViewController {
     
     title = "News"
     
-    //    view.addSubview(stackView)
     tableView.delegate = self
     tableView.dataSource = self
     view.backgroundColor = .systemBackground
@@ -113,7 +110,6 @@ class MainViewController: UIViewController {
     setupConstraints()
     
     
-    // Mark - вопрос 1 - куда лучше размещать запрос данных
     PostManager.shared.getNews { [weak self] result in
       switch result {
       case .success(let posts):
@@ -144,10 +140,7 @@ class MainViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    //    stackView.frame = view.bounds
-    //    stackView.frame = CGRect.init(origin: .zero, size: CGSize(width: 200, height: 200))
-    //    tableView.frame = view.bounds
-    //    tableView.frame = CGRect.init(origin: .zero, size: CGSize(width: 200, height: 200))
+
   }
 }
 
@@ -163,25 +156,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell else { fatalError() }
     cell.configure(with: postModels[indexPath.row])
+        
+    cell.buttonTapBlock = { [weak self] in
+      guard let self = self else { return }
+      print("Button tapped")
+    }
     
-    // if the cell is expanded
+    // Expand and Collapse cell
     if expandedIndexSet.contains(indexPath.row) {
-      // the label can take as many lines it need to display all text
       cell.previewLabel.numberOfLines = 0
-      //          cell. messageLabel.numberOfLines = 0
     } else {
-      // if the cell is contracted
-      // only show first 3 lines
       cell.previewLabel.numberOfLines = 2
-      //          cell.messageLabel.numberOfLines = 3
     }
     
     return cell
   }
-  
-  //  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-  //    return 220
-  //  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
@@ -194,8 +183,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 //    }
 //    tableView.reloadRows(at: [indexPath], with: .automatic)
     
-    // открыть новый ВК
-     let detailVC = DetailViewController()
+    // Passing data to DetailViewController
+    let detailVC = DetailViewController()
+    detailVC.newsTitle = postModels[indexPath.row].title
+    detailVC.newsText = postModels[indexPath.row].previewText
+    detailVC.likes = String(postModels[indexPath.row].likes)
+    detailVC.date = String(postModels[indexPath.row].time)
+    
     navigationController?.pushViewController(detailVC, animated: true)
   }
 }

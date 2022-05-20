@@ -8,11 +8,19 @@
 import UIKit
 import SwiftUI
 
+//protocol FeedCellViewModel {
+//  var sizes: FeedCellSizes { get }
+//}
+//
+//protocol FeedCellSizes {
+//  var previewLabelFrame: CGRect { get }
+//}
+
 class NewsTableViewCell: UITableViewCell {
   
   static let identifier = "NewsTableViewCell"
   
-//  var expandedIndexSet : IndexSet = []
+  var buttonTapBlock: (()->())?
   
   // MARK: - View
   
@@ -115,12 +123,6 @@ class NewsTableViewCell: UITableViewCell {
     previewLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 15).isActive = true
     previewLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -20).isActive = true
     
-    // bottomStackView constraints
-//    bottomStackView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 10).isActive = true
-//    bottomStackView.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 10).isActive = true
-//    bottomStackView.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -10).isActive = true
-//    bottomStackView.heightAnchor.constraint(equalToConstant: 15).isActive = true
-    
     // likesStackView constraints
     likesStackView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 10).isActive = true
     likesStackView.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 10).isActive = true
@@ -129,7 +131,6 @@ class NewsTableViewCell: UITableViewCell {
     // timestampLabel constraints
     timestampLabel.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 10).isActive = true
     timestampLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -10).isActive = true
-//    timestampLabel.leadingAnchor.constraint(equalTo: likesStackView.trailingAnchor, constant: -10).isActive = true
     timestampLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
     // expandBotton constraints
@@ -164,6 +165,7 @@ class NewsTableViewCell: UITableViewCell {
   
   // Кнопка не работает, не могу понять причину.
   @objc func buttonAction(_ sender: UIButton!) {
+    buttonTapBlock?()
     
     print("Button tapped")
   }
@@ -188,6 +190,12 @@ class NewsTableViewCell: UITableViewCell {
     previewLabel.text = cellModel.previewText
     likesCountLabel.text = String(cellModel.likes)
     timestampLabel.text = String(cellModel.time)
+    
+//    previewLabel.frame = cellModel.sizes.previewLabelFrame
+  }
+  
+  func configureButton(with buttonTitle: String) {
+    expandBotton.setTitle(buttonTitle, for: .normal)
   }
 }
 
