@@ -15,10 +15,20 @@ class DetailViewController: UIViewController {
   var newsTitle = ""
   var newsText = ""
   var likes = ""
-  var date = ""
+  var date = "" // 1645030659
+//  var dateTest: String {
+//    let input: Date = Date(timeIntervalSince1970: date)
+//    let dataFormatter = DateFormatter()
+//    dataFormatter.dateFormat = "EEE, MMMM d YYYY"
+//    return dataFormatter.string(from: input)
+//  }
   
   var height = UIScreen.main.bounds.height / 2
   
+//  public func configure(with date: Date) {
+//    dayLabe.text = date.toString(withFormat: "d")
+//    dayOfTheWeakLabel.text = date.toString(withFormat: "EEE").uppercased()
+//  }
   
   // MARK: - Views
   
@@ -107,6 +117,8 @@ class DetailViewController: UIViewController {
     previewLabel.text = newsText
     likesCountLabel.text = likes
     timestampLabel.text = date
+      
+      
     
     setupPostView()
     setupConstraints()

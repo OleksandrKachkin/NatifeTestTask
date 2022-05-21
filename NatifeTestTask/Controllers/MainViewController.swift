@@ -188,7 +188,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     detailVC.newsTitle = postModels[indexPath.row].title
     detailVC.newsText = postModels[indexPath.row].previewText
     detailVC.likes = String(postModels[indexPath.row].likes)
-    detailVC.date = String(postModels[indexPath.row].time)
+//    detailVC.date = String(postModels[indexPath.row].time)
+    detailVC.date = postModels[indexPath.row].time.toString(withFormat: "MM/dd/yyyy").uppercased()
     
     navigationController?.pushViewController(detailVC, animated: true)
   }
