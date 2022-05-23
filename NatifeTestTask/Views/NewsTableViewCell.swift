@@ -6,15 +6,7 @@
 //
 
 import UIKit
-import SwiftUI
 
-//protocol FeedCellViewModel {
-//  var sizes: FeedCellSizes { get }
-//}
-//
-//protocol FeedCellSizes {
-//  var previewLabelFrame: CGRect { get }
-//}
 
 class NewsTableViewCell: UITableViewCell {
   
@@ -100,8 +92,8 @@ class NewsTableViewCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    overlayFirstLayer()
     overlaySecondLayer()
+    overlayFirstLayer()
     expandBotton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
   }
   
@@ -189,25 +181,16 @@ class NewsTableViewCell: UITableViewCell {
     newsTitleLabel.text = cellModel.title
     previewLabel.text = cellModel.previewText
     likesCountLabel.text = String(cellModel.likes)
-//    timestampLabel.text = String(cellModel.time)
-    timestampLabel.text = cellModel.time.toString(withFormat: "MM/dd/yyyy")
     
-//    previewLabel.frame = cellModel.sizes.previewLabelFrame
+    let date = Date(timeIntervalSince1970: cellModel.date).toString(withFormat: "dd/MM/yyyy")
+    timestampLabel.text = date
+    
   }
   
   public func configureButton(with buttonTitle: String) {
     expandBotton.setTitle(buttonTitle, for: .normal)
   }
   
-//  public func configure(with date: Date) {
-////    timestampLabel.text = date.toString(withFormat: "d")
-////    dayOfTheWeakLabel.text = date.toString(withFormat: "EEE").uppercased()
-//        let input: Date = Date(timeIntervalSince1970: date)
-//        let dataFormatter = DateFormatter()
-//        dataFormatter.dateFormat = "EEE, MMMM d YYYY"
-//        return dataFormatter.string(from: input)
-//      }
-//  }
+  
+  
 }
-
-

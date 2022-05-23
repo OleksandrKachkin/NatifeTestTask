@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		B0586D2B28300E9E005E840D /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D2A28300E9E005E840D /* UserDefaults.swift */; };
 		B0586D3028323B4F005E840D /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D2F28323B4F005E840D /* PostManager.swift */; };
-		B0586D3228323F7F005E840D /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3128323F7F005E840D /* PostModel.swift */; };
+		B0586D3228323F7F005E840D /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3128323F7F005E840D /* CellModel.swift */; };
 		B0586D3428325090005E840D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3328325090005E840D /* APIResponse.swift */; };
+		B0586D9D28368738005E840D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D9C28368738005E840D /* DetailViewController.swift */; };
 		B07802B3282E674B009F2E50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802B2282E674B009F2E50 /* AppDelegate.swift */; };
 		B07802B5282E674B009F2E50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802B4282E674B009F2E50 /* SceneDelegate.swift */; };
 		B07802BA282E674B009F2E50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07802B8282E674B009F2E50 /* Main.storyboard */; };
@@ -18,13 +19,15 @@
 		B07802BF282E674E009F2E50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07802BD282E674E009F2E50 /* LaunchScreen.storyboard */; };
 		B07802C7282E7103009F2E50 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802C6282E7103009F2E50 /* MainViewController.swift */; };
 		B07802C9282E7846009F2E50 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */; };
+		B0ACDEA1283960B500055AB3 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ACDEA0283960B500055AB3 /* Date + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B0586D2A28300E9E005E840D /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B0586D2F28323B4F005E840D /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
-		B0586D3128323F7F005E840D /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		B0586D3128323F7F005E840D /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		B0586D3328325090005E840D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		B0586D9C28368738005E840D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B07802AF282E674B009F2E50 /* NatifeTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatifeTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07802B2282E674B009F2E50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B07802B4282E674B009F2E50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 		B07802C0282E674E009F2E50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B07802C6282E7103009F2E50 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		B0ACDEA0283960B500055AB3 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				B07802B8282E674B009F2E50 /* Main.storyboard */,
-				B0586D3128323F7F005E840D /* PostModel.swift */,
 				B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */,
 			);
 			path = Views;
@@ -62,6 +65,7 @@
 			children = (
 				B0586D2F28323B4F005E840D /* PostManager.swift */,
 				B0586D3328325090005E840D /* APIResponse.swift */,
+				B0586D3128323F7F005E840D /* CellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -70,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				B07802C6282E7103009F2E50 /* MainViewController.swift */,
+				B0586D9C28368738005E840D /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -102,8 +107,17 @@
 				B07802BD282E674E009F2E50 /* LaunchScreen.storyboard */,
 				B07802C0282E674E009F2E50 /* Info.plist */,
 				B0586D2A28300E9E005E840D /* UserDefaults.swift */,
+				B0ACDEA22839613000055AB3 /* Extensions */,
 			);
 			path = NatifeTestTask;
+			sourceTree = "<group>";
+		};
+		B0ACDEA22839613000055AB3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B0ACDEA0283960B500055AB3 /* Date + Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,11 +191,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0586D9D28368738005E840D /* DetailViewController.swift in Sources */,
 				B0586D2B28300E9E005E840D /* UserDefaults.swift in Sources */,
 				B0586D3428325090005E840D /* APIResponse.swift in Sources */,
 				B07802C7282E7103009F2E50 /* MainViewController.swift in Sources */,
 				B07802B3282E674B009F2E50 /* AppDelegate.swift in Sources */,
-				B0586D3228323F7F005E840D /* PostModel.swift in Sources */,
+				B0ACDEA1283960B500055AB3 /* Date + Extension.swift in Sources */,
+				B0586D3228323F7F005E840D /* CellModel.swift in Sources */,
 				B07802B5282E674B009F2E50 /* SceneDelegate.swift in Sources */,
 				B07802C9282E7846009F2E50 /* NewsTableViewCell.swift in Sources */,
 				B0586D3028323B4F005E840D /* PostManager.swift in Sources */,

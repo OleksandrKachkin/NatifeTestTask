@@ -23,7 +23,6 @@ class MainViewController: UIViewController {
     let sc = UISegmentedControl(items: ["Likes", "Date"])
     sc.selectedSegmentIndex = 0
     sc.selectedSegmentTintColor = .systemGray
-    sc.addTarget(self, action: #selector(segmentedControlAction(_:)), for: .touchUpInside)
     return sc
   }()
   
@@ -49,51 +48,22 @@ class MainViewController: UIViewController {
     return rightButton
   }()
   
+  // Actions
+  @objc func sortButtonAction() {
+    if segmentedControl.selectedSegmentIndex == 0 {
+      postModels = postModels.sorted(by: { $0.likes < $1.likes})
+    } else {
+      postModels = postModels.sorted(by: { $0.date < $1.date})
+    }
+    tableView.reloadData()
+  }
+  
   func setupSortingButton(){
     let rightButton = rightButton
-    
     rightButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     rightButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     let rightButtonItem = UIBarButtonItem(customView: rightButton)
     navigationItem.rightBarButtonItem = rightButtonItem
-  }
-  
-  
-  // Actions
-  @objc func segmentedControlAction(_ sender: UISegmentedControl) {
-    
-    sorting()
-    
-//    switch segmentedControl.selectedSegmentIndex {
-//    case 0:
-//      postModels = postModels.sorted(by: { $0.likes < $1.likes})
-//    case 1:
-//      postModels = postModels.sorted(by: { $0.time < $1.time})
-//    default:
-//      print("Hello error")
-//    }
-//
-//    tableView.reloadData()
-  }
-  
-  @objc func sortButtonAction() {
-    ascendingSorting.toggle()
-//    if ascendingSorting {
-//      rightButton.setBackgroundImage(UIImage(named: "ZA"), for: .normal)
-//    } else {
-//      rightButton.setBackgroundImage(UIImage(named: "AZ"), for: .normal)
-//    }
-    
-    sorting()
-  }
-  
-  private func sorting() {
-    if segmentedControl.selectedSegmentIndex == 0 {
-      postModels = postModels.sorted(by: { $0.likes < $1.likes})
-    } else {
-      postModels = postModels.sorted(by: { $0.time < $1.time})
-    }
-    tableView.reloadData()
   }
   
   
@@ -115,7 +85,7 @@ class MainViewController: UIViewController {
       case .success(let posts):
         self?.news = posts
         self?.postModels = posts.compactMap({
-          CellModel(title: $0.title, previewText: $0.previewText, likes: $0.likesCount, time: $0.timestamp)
+          CellModel(title: $0.title, previewText: $0.previewText, likes: $0.likesCount, date: $0.timestamp)
         })
         
         DispatchQueue.main.async {
@@ -188,8 +158,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     detailVC.newsTitle = postModels[indexPath.row].title
     detailVC.newsText = postModels[indexPath.row].previewText
     detailVC.likes = String(postModels[indexPath.row].likes)
-//    detailVC.date = String(postModels[indexPath.row].time)
-    detailVC.date = postModels[indexPath.row].time.toString(withFormat: "MM/dd/yyyy").uppercased()
+    
+    
+    var dateString: String {
+      let date = postModels[indexPath.row].date
+      let input: Date = Date(timeIntervalSince1970: date)
+    
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "dd MMMM YYYY"
+      dateFormatter.locale = Locale(identifier: "en")
+      return dateFormatter.string(from: input)
+    }
+    
+    detailVC.date = dateString
+    
     
     navigationController?.pushViewController(detailVC, animated: true)
   }

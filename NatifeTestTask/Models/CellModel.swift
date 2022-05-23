@@ -12,7 +12,7 @@ struct CellModel {
   let title: String
   let previewText: String
   let likes: Int
-  let time: Date
+  let date: TimeInterval
   
   public func configure(with date: Date) {
 //    let input: Date = Date(timeIntervalSince1970: date)

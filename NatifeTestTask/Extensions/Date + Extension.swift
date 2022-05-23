@@ -8,13 +8,27 @@
 import Foundation
 
 extension Date {
+  
+  func toString(withFormat format: String = "dd MMMM yyyy") -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone.current
+    dateFormatter.locale = Locale(identifier: "en")
+    dateFormatter.dateFormat = format
+    return dateFormatter.string(from: self)
+  }
+  
+  // Returns the amount of days from another date
+  func days(from date: Date) -> Int {
+    return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+  }
     
-    func toString(withFormat format: String = "MM/dd/yyyy") -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale(identifier: "en")
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
-    
+  
+  // Разница между 2-мя датами
+  static func - (lhs: Date, rhs: Date) -> TimeInterval {
+    return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+  }
+  
+  
 }
+
+

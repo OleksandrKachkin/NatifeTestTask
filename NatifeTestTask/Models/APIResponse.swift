@@ -13,7 +13,7 @@ struct APIResponse: Codable {
 
 struct Post: Codable {
   let postId: Int
-  let timestamp: Date
+  let timestamp: TimeInterval
   let title: String
   let previewText: String
   let likesCount: Int

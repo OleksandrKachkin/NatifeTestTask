@@ -10,25 +10,25 @@ import SwiftUI
 
 class DetailViewController: UIViewController {
   
+  private var postModels = [CellModel]()
+  
   // MARK: - Properties
   
   var newsTitle = ""
   var newsText = ""
   var likes = ""
-  var date = "" // 1645030659
-//  var dateTest: String {
-//    let input: Date = Date(timeIntervalSince1970: date)
-//    let dataFormatter = DateFormatter()
-//    dataFormatter.dateFormat = "EEE, MMMM d YYYY"
-//    return dataFormatter.string(from: input)
-//  }
+  var date = ""
+  var dateTest: String {
+    let input: Date = Date(timeIntervalSince1970: 1645030659)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd MMMM YYYY"
+    dateFormatter.locale = Locale(identifier: "en")
+    return dateFormatter.string(from: input)
+  }
+
   
   var height = UIScreen.main.bounds.height / 2
-  
-//  public func configure(with date: Date) {
-//    dayLabe.text = date.toString(withFormat: "d")
-//    dayOfTheWeakLabel.text = date.toString(withFormat: "EEE").uppercased()
-//  }
+
   
   // MARK: - Views
   
@@ -163,24 +163,3 @@ class DetailViewController: UIViewController {
   }
 }
 
-
-// MARK: - Show Canvas like SwiftUI
-
-struct SwiftUIController: UIViewControllerRepresentable {
-  typealias UIViewControllerType = DetailViewController
-  
-  func makeUIViewController(context: Context) -> UIViewControllerType {
-    let viewController = UIViewControllerType()
-    return viewController
-  }
-  
-  func updateUIViewController(_ uiViewController: DetailViewController, context: Context) {
-    
-  }
-}
-
-struct SwiftUIController_Previews: PreviewProvider {
-  static var previews: some View {
-    SwiftUIController().edgesIgnoringSafeArea(.all)
-  }
-}
