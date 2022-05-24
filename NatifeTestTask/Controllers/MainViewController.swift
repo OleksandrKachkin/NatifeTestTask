@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
   //MARK: - Properties
   private var news = [Post]()
   private var postModels = [CellModel]()
-  private var ascendingSorting = true
+  private var ascendingSorting = false
   private var expandedIndexSet : IndexSet = []
   
   //MARK: - Views
@@ -40,22 +40,43 @@ class MainViewController: UIViewController {
   
   lazy var rightButton: UIButton = {
     let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-    rightButton.setBackgroundImage(UIImage(named: "AZ"), for: .normal)
+    rightButton.setBackgroundImage(UIImage(named: "ZA"), for: .normal)
     rightButton.addTarget(self, action: #selector(sortButtonAction), for: .touchUpInside)
     return rightButton
   }()
   
   // Actions
   @objc func sortButtonAction() {
+    ascendingSorting.toggle()
+        if ascendingSorting {
+          rightButton.setBackgroundImage(UIImage(named: "AZ"), for: .normal)
+          sortingAZ()
+        } else {
+          rightButton.setBackgroundImage(UIImage(named: "ZA"), for: .normal)
+          sortingZA()
+        }
+  }
+  
+  // Sorting methods
+  func sortingAZ() {
     if segmentedControl.selectedSegmentIndex == 0 {
       postModels = postModels.sorted(by: { $0.likes < $1.likes})
+    } else {
+      postModels = postModels.sorted(by: { $0.date > $1.date})
+    }
+    tableView.reloadData()
+  }
+  
+  func sortingZA() {
+    if segmentedControl.selectedSegmentIndex == 0 {
+      postModels = postModels.sorted(by: { $0.likes > $1.likes})
     } else {
       postModels = postModels.sorted(by: { $0.date < $1.date})
     }
     tableView.reloadData()
   }
   
-  
+  // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -67,7 +88,7 @@ class MainViewController: UIViewController {
     setupSortingButton()
     setupConstraints()
     
-    
+    // Getting data
     PostManager.shared.getNews { [weak self] result in
       switch result {
       case .success(let posts):
@@ -85,6 +106,7 @@ class MainViewController: UIViewController {
     }
   }
   
+  //MARK: - View setup
   func setupSortingButton(){
     let rightButton = rightButton
     rightButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
@@ -101,13 +123,9 @@ class MainViewController: UIViewController {
     stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-  }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
-
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
