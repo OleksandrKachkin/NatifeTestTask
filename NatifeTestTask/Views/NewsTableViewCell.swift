@@ -158,8 +158,15 @@ class NewsTableViewCell: UITableViewCell {
     newsTitleLabel.text = cellModel.title
     previewLabel.text = cellModel.previewText
     likesCountLabel.text = String(cellModel.likes)
-    let date = Date(timeIntervalSince1970: cellModel.date).toString(withFormat: "dd/MM/yyyy")
-    timestampLabel.text = date
+        
+    let postDate = Date(timeIntervalSince1970: cellModel.date)
+    let interval = Date() - postDate
+    
+    if Int(interval.day!) <= 0 {
+      timestampLabel.text = "today"
+    } else {
+      timestampLabel.text = "\(interval.day!) days ago"
+    }
   }
   
   public func configureButton(withTitle buttonTitle: String) {
