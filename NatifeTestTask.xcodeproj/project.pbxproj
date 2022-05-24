@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B0586D2B28300E9E005E840D /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D2A28300E9E005E840D /* UserDefaults.swift */; };
 		B0586D3028323B4F005E840D /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D2F28323B4F005E840D /* PostManager.swift */; };
 		B0586D3228323F7F005E840D /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3128323F7F005E840D /* CellModel.swift */; };
 		B0586D3428325090005E840D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3328325090005E840D /* APIResponse.swift */; };
@@ -23,7 +22,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B0586D2A28300E9E005E840D /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B0586D2F28323B4F005E840D /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		B0586D3128323F7F005E840D /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		B0586D3328325090005E840D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 				B07802BB282E674E009F2E50 /* Assets.xcassets */,
 				B07802BD282E674E009F2E50 /* LaunchScreen.storyboard */,
 				B07802C0282E674E009F2E50 /* Info.plist */,
-				B0586D2A28300E9E005E840D /* UserDefaults.swift */,
 				B0ACDEA22839613000055AB3 /* Extensions */,
 			);
 			path = NatifeTestTask;
@@ -192,7 +189,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0586D9D28368738005E840D /* DetailViewController.swift in Sources */,
-				B0586D2B28300E9E005E840D /* UserDefaults.swift in Sources */,
 				B0586D3428325090005E840D /* APIResponse.swift in Sources */,
 				B07802C7282E7103009F2E50 /* MainViewController.swift in Sources */,
 				B07802B3282E674B009F2E50 /* AppDelegate.swift in Sources */,

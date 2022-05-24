@@ -10,21 +10,18 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell {
   
+  // MARK: - Properties
   static let identifier = "NewsTableViewCell"
-  
   var buttonTapBlock: (()->())?
   
   // MARK: - View
-  
-  // Первый слой
-  let postView: UIView = {
+  lazy var postView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
-  // Второй слой
-   let newsTitleLabel: UILabel = {
+  private let newsTitleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 0
@@ -33,7 +30,7 @@ class NewsTableViewCell: UITableViewCell {
     return label
   }()
   
-   let previewLabel: UILabel = {
+  public let previewLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.font = .systemFont(ofSize: 16, weight: .regular)
@@ -64,7 +61,6 @@ class NewsTableViewCell: UITableViewCell {
     stack.axis = .horizontal
     stack.alignment = .fill
     stack.distribution = .fillProportionally
-    
     return stack
   }()
   
@@ -91,18 +87,37 @@ class NewsTableViewCell: UITableViewCell {
   // MARK: - Lifecycle
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
-    overlaySecondLayer()
-    overlayFirstLayer()
-    expandBotton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+    setupViews()
+    setupConstraints()
   }
   
-  func overlaySecondLayer() {
+  required init?(coder: NSCoder) {
+    fatalError()
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    setupViews()
+    setupConstraints()
+  }
+  
+  func setupViews() {
+    addSubview(postView)
     postView.addSubview(newsTitleLabel)
     postView.addSubview(previewLabel)
     postView.addSubview(likesStackView)
     postView.addSubview(timestampLabel)
     postView.addSubview(expandBotton)
+  }
+  
+  // MARK: - Actions
+  @objc func buttonAction(_ sender: UIButton!) {
+    buttonTapBlock?()
+    print("Button tapped")
+  }
+  
+  //MARK: - View setup
+  func setupConstraints() {
     
     // newsTitleLabel constraints
     newsTitleLabel.topAnchor.constraint(equalTo: postView.topAnchor, constant: 8).isActive = true
@@ -131,10 +146,6 @@ class NewsTableViewCell: UITableViewCell {
     expandBotton.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: 0).isActive = true
     expandBotton.bottomAnchor.constraint(equalTo: postView.bottomAnchor, constant: 0).isActive = true
     expandBotton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-  }
-  
-  func overlayFirstLayer() {
-    addSubview(postView)
     
     // postView constraints
     postView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
@@ -143,54 +154,15 @@ class NewsTableViewCell: UITableViewCell {
     postView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
   }
   
-  required init?(coder: NSCoder) {
-    fatalError()
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-  }
-  
-  
-  // MARK: - Actions
-  
-  // Кнопка не работает, не могу понять причину.
-  @objc func buttonAction(_ sender: UIButton!) {
-    buttonTapBlock?()
-    
-    print("Button tapped")
-  }
-  
-  @objc func didTapButton(_ sender: UIButton!) {
-    
-    print("Button tapped")
-  }
-  
-  
-  
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    newsTitleLabel.text = nil
-    previewLabel.text = nil
-    likesCountLabel.text = nil
-    timestampLabel.text = nil
-  }
-  
-  func configure(with cellModel: CellModel) {
+  public func configure(with cellModel: CellModel) {
     newsTitleLabel.text = cellModel.title
     previewLabel.text = cellModel.previewText
     likesCountLabel.text = String(cellModel.likes)
-    
     let date = Date(timeIntervalSince1970: cellModel.date).toString(withFormat: "dd/MM/yyyy")
     timestampLabel.text = date
-    
   }
   
-  public func configureButton(with buttonTitle: String) {
+  public func configureButton(withTitle buttonTitle: String) {
     expandBotton.setTitle(buttonTitle, for: .normal)
   }
-  
-  
-  
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 class PostManager {
+  
   // Singelton
   static let shared = PostManager()
   
@@ -17,16 +18,6 @@ class PostManager {
   
   private init() {}
   
-  
-  
-//  let postURL = "https://raw.githubusercontent.com/anton-natife/jsons/master/api/main.json"
-  
-//  var delegate: PostManagerDelegate?
-  
-//  func fetchPost(postID: Int) {
-//    let urlString = "https://raw.githubusercontent.com/anton-natife/jsons/master/api/main.json"
-//    performRequest(with: urlString)
-//  }
   
   public func getNews(completion: @escaping (Result<[Post], Error>) -> Void) {
     guard let url = Constant.newsURL else { return }
@@ -38,7 +29,7 @@ class PostManager {
       else if let safeData = data {
         do {
           let result = try JSONDecoder().decode(APIResponse.self, from: safeData)
-          print("Articles: \(result.posts.count)")
+          print("Number of posts: \(result.posts.count)")
           completion(.success(result.posts))
         }
         catch {
