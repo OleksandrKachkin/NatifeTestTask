@@ -19,6 +19,7 @@
 		B07802C7282E7103009F2E50 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802C6282E7103009F2E50 /* MainViewController.swift */; };
 		B07802C9282E7846009F2E50 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */; };
 		B0ACDEA1283960B500055AB3 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ACDEA0283960B500055AB3 /* Date + Extension.swift */; };
+		B0FD281B283E9ECC00E0B98D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD281A283E9ECC00E0B98D /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B07802C6282E7103009F2E50 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		B0ACDEA0283960B500055AB3 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
+		B0FD281A283E9ECC00E0B98D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,11 +51,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B011D0EE283E9895001E5C70 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B07802B2282E674B009F2E50 /* AppDelegate.swift */,
+				B07802B4282E674B009F2E50 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		B0586D2C28323894005E840D /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B07802B8282E674B009F2E50 /* Main.storyboard */,
 				B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */,
+				B0FD281A283E9ECC00E0B98D /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -96,15 +108,14 @@
 		B07802B1282E674B009F2E50 /* NatifeTestTask */ = {
 			isa = PBXGroup;
 			children = (
-				B07802B2282E674B009F2E50 /* AppDelegate.swift */,
-				B07802B4282E674B009F2E50 /* SceneDelegate.swift */,
-				B0586D2C28323894005E840D /* Views */,
+				B011D0EE283E9895001E5C70 /* App */,
 				B0586D2D283238C1005E840D /* Models */,
+				B0586D2C28323894005E840D /* Views */,
 				B0586D2E283238D4005E840D /* Controllers */,
+				B0ACDEA22839613000055AB3 /* Extensions */,
 				B07802BB282E674E009F2E50 /* Assets.xcassets */,
 				B07802BD282E674E009F2E50 /* LaunchScreen.storyboard */,
 				B07802C0282E674E009F2E50 /* Info.plist */,
-				B0ACDEA22839613000055AB3 /* Extensions */,
 			);
 			path = NatifeTestTask;
 			sourceTree = "<group>";
@@ -191,6 +202,7 @@
 				B0586D9D28368738005E840D /* DetailViewController.swift in Sources */,
 				B0586D3428325090005E840D /* APIResponse.swift in Sources */,
 				B07802C7282E7103009F2E50 /* MainViewController.swift in Sources */,
+				B0FD281B283E9ECC00E0B98D /* MainView.swift in Sources */,
 				B07802B3282E674B009F2E50 /* AppDelegate.swift in Sources */,
 				B0ACDEA1283960B500055AB3 /* Date + Extension.swift in Sources */,
 				B0586D3228323F7F005E840D /* CellModel.swift in Sources */,
