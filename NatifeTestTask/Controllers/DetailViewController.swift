@@ -11,17 +11,24 @@ import SwiftUI
 class DetailViewController: UIViewController {
   
   // MARK: - Properties
+  
   var height = UIScreen.main.bounds.height / 2
+  var id = 0
   var newsTitle = ""
   var newsText = ""
   var likes = ""
   var date = ""
   
+  private var post: PostID?
+  private let scrollView = UIScrollView()
+  
   // MARK: - Views
+  
   private let imageView: UIImageView = {
-    let image = UIImageView(image: UIImage(named: "postImageView"))
-    image.contentMode = .scaleToFill
-    return image
+    let imageView = UIImageView()
+    imageView.contentMode = .scaleAspectFill
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
   }()
   
   lazy var postView: UIView = {
@@ -34,7 +41,7 @@ class DetailViewController: UIViewController {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.numberOfLines = 0
-    label.font = .systemFont(ofSize: 32, weight: .regular)
+    label.font = .systemFont(ofSize: 20, weight: .semibold)
     label.textAlignment = .left
     return label
   }()
@@ -83,38 +90,81 @@ class DetailViewController: UIViewController {
   }()
   
   lazy var stackView: UIStackView = {
-    let stack = UIStackView(arrangedSubviews: [imageView, postView])
+    let stack = UIStackView(arrangedSubviews: [postView])
     stack.translatesAutoresizingMaskIntoConstraints = false
     stack.axis = .vertical
     return stack
   }()
   
   // MARK: - Lifecycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Natife Actual News"
-    view.backgroundColor = .white
-    
     newsTitleLabel.text = newsTitle
-    previewLabel.text = newsText
+//    previewLabel.text = newsText
     likesCountLabel.text = likes
     timestampLabel.text = date
     
-    setupPostView()
-    setupStackView()
+    setupViews()
+    setupScrollView()
+    setupConstraints()
+    
+    PostManager.shared.getPost(id: id) { [weak self] result in
+      switch result {
+      case .success(let posts):
+        self?.post = posts
+        
+        self!.imageView.loadFrom(URLAddress: posts.postImage)
+        
+        DispatchQueue.main.async {
+          self!.previewLabel.text = posts.text
+        }
+        
+      case .failure(let error):
+        print(error)
+      }
+    }
   }
   
   //MARK: - View setup
-  func setupPostView(){
-    view.addSubview(stackView)
+  func setupViews(){
+    title = "Natife News"
+    view.backgroundColor = .white
+    view.addSubview(scrollView)
+    view.addSubview(imageView)
+    
+//    view.addSubview(stackView)
     postView.addSubview(newsTitleLabel)
     postView.addSubview(previewLabel)
     postView.addSubview(likesStackView)
     postView.addSubview(timestampLabel)
   }
   
-  func setupStackView(){
+  func setupScrollView() {
+    scrollView.addSubview(stackView)
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  func setupConstraints() {
+    
+    // imageView constraints
+    imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+    imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+    
+    // scrollView constraints
+    scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    scrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+    scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    
+    // stackView constraints
+    stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+    stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+    stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+    stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
     
     // newsTitleLabel constraints
     newsTitleLabel.topAnchor.constraint(equalTo: postView.topAnchor, constant: 20).isActive = true
@@ -136,11 +186,8 @@ class DetailViewController: UIViewController {
     timestampLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -15).isActive = true
     timestampLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
-    // stackView constraints
-    stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-    stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-    stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-    stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+   
   }
 }
+
 

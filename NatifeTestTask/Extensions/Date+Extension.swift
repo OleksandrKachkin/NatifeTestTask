@@ -14,6 +14,7 @@ extension Date {
     dateFormatter.timeZone = TimeZone.current
     dateFormatter.locale = Locale(identifier: "en")
     dateFormatter.dateFormat = format
+    
     return dateFormatter.string(from: self)
   }
   
@@ -29,5 +30,3 @@ extension Date {
   }
   
 }
-
-

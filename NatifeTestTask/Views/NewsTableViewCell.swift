@@ -10,11 +10,15 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell {
   
+//  var postManager = PostManager()
+  
   // MARK: - Properties
+  
   static let identifier = "NewsTableViewCell"
   var buttonTapBlock: (()->())?
   
   // MARK: - View
+  
   lazy var postView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -154,12 +158,12 @@ class NewsTableViewCell: UITableViewCell {
     postView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
   }
   
-  public func configure(with cellModel: CellModel) {
-    newsTitleLabel.text = cellModel.title
-    previewLabel.text = cellModel.previewText
-    likesCountLabel.text = String(cellModel.likes)
+  public func configure(with model: Post) {
+    newsTitleLabel.text = model.title
+    previewLabel.text = model.previewText
+    likesCountLabel.text = String(model.likesCount)
         
-    let postDate = Date(timeIntervalSince1970: cellModel.date)
+    let postDate = Date(timeIntervalSince1970: model.timestamp)
     let interval = Date() - postDate
     
     if Int(interval.day!) <= 0 {

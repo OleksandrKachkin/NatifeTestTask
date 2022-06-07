@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B0586D3028323B4F005E840D /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D2F28323B4F005E840D /* PostManager.swift */; };
-		B0586D3228323F7F005E840D /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3128323F7F005E840D /* CellModel.swift */; };
+		B0586D3228323F7F005E840D /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3128323F7F005E840D /* PostModel.swift */; };
 		B0586D3428325090005E840D /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D3328325090005E840D /* APIResponse.swift */; };
 		B0586D9D28368738005E840D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0586D9C28368738005E840D /* DetailViewController.swift */; };
 		B07802B3282E674B009F2E50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802B2282E674B009F2E50 /* AppDelegate.swift */; };
@@ -18,13 +18,15 @@
 		B07802BF282E674E009F2E50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07802BD282E674E009F2E50 /* LaunchScreen.storyboard */; };
 		B07802C7282E7103009F2E50 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802C6282E7103009F2E50 /* MainViewController.swift */; };
 		B07802C9282E7846009F2E50 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */; };
-		B0ACDEA1283960B500055AB3 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ACDEA0283960B500055AB3 /* Date + Extension.swift */; };
+		B0ACDEA1283960B500055AB3 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ACDEA0283960B500055AB3 /* Date+Extension.swift */; };
+		B0B8CA5C284F81CE002D9788 /* DateInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B8CA5B284F81CE002D9788 /* DateInterval+Extension.swift */; };
+		B0B8CA5E284F9ED1002D9788 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B8CA5D284F9ED0002D9788 /* UIImageView+Extension.swift */; };
 		B0FD281B283E9ECC00E0B98D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FD281A283E9ECC00E0B98D /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B0586D2F28323B4F005E840D /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
-		B0586D3128323F7F005E840D /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		B0586D3128323F7F005E840D /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		B0586D3328325090005E840D /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		B0586D9C28368738005E840D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B07802AF282E674B009F2E50 /* NatifeTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatifeTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,7 +38,9 @@
 		B07802C0282E674E009F2E50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B07802C6282E7103009F2E50 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B07802C8282E7846009F2E50 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
-		B0ACDEA0283960B500055AB3 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
+		B0ACDEA0283960B500055AB3 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		B0B8CA5B284F81CE002D9788 /* DateInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateInterval+Extension.swift"; sourceTree = "<group>"; };
+		B0B8CA5D284F9ED0002D9788 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		B0FD281A283E9ECC00E0B98D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +79,7 @@
 			children = (
 				B0586D2F28323B4F005E840D /* PostManager.swift */,
 				B0586D3328325090005E840D /* APIResponse.swift */,
-				B0586D3128323F7F005E840D /* CellModel.swift */,
+				B0586D3128323F7F005E840D /* PostModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -123,7 +127,9 @@
 		B0ACDEA22839613000055AB3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B0ACDEA0283960B500055AB3 /* Date + Extension.swift */,
+				B0ACDEA0283960B500055AB3 /* Date+Extension.swift */,
+				B0B8CA5B284F81CE002D9788 /* DateInterval+Extension.swift */,
+				B0B8CA5D284F9ED0002D9788 /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -202,10 +208,12 @@
 				B0586D9D28368738005E840D /* DetailViewController.swift in Sources */,
 				B0586D3428325090005E840D /* APIResponse.swift in Sources */,
 				B07802C7282E7103009F2E50 /* MainViewController.swift in Sources */,
+				B0B8CA5C284F81CE002D9788 /* DateInterval+Extension.swift in Sources */,
 				B0FD281B283E9ECC00E0B98D /* MainView.swift in Sources */,
 				B07802B3282E674B009F2E50 /* AppDelegate.swift in Sources */,
-				B0ACDEA1283960B500055AB3 /* Date + Extension.swift in Sources */,
-				B0586D3228323F7F005E840D /* CellModel.swift in Sources */,
+				B0B8CA5E284F9ED1002D9788 /* UIImageView+Extension.swift in Sources */,
+				B0ACDEA1283960B500055AB3 /* Date+Extension.swift in Sources */,
+				B0586D3228323F7F005E840D /* PostModel.swift in Sources */,
 				B07802B5282E674B009F2E50 /* SceneDelegate.swift in Sources */,
 				B07802C9282E7846009F2E50 /* NewsTableViewCell.swift in Sources */,
 				B0586D3028323B4F005E840D /* PostManager.swift in Sources */,
