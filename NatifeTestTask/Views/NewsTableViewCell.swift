@@ -130,7 +130,7 @@ class NewsTableViewCell: UITableViewCell {
     newsTitleLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
     
     // previewLabel constraints
-    previewLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: -10).isActive = true
+    previewLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor).isActive = true
     previewLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 15).isActive = true
     previewLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -20).isActive = true
     

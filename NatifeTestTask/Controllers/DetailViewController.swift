@@ -73,6 +73,7 @@ class DetailViewController: UIViewController {
   
   lazy var likesStackView: UIStackView = {
     let stack = UIStackView(arrangedSubviews: [likesImageView, likesCountLabel])
+    stack.backgroundColor = .green
     stack.translatesAutoresizingMaskIntoConstraints = false
     stack.spacing = 4
     stack.axis = .horizontal
@@ -90,9 +91,10 @@ class DetailViewController: UIViewController {
   }()
   
   lazy var stackView: UIStackView = {
-    let stack = UIStackView(arrangedSubviews: [postView])
+    let stack = UIStackView(arrangedSubviews: [newsTitleLabel, previewLabel, likesImageView, likesCountLabel, timestampLabel])
     stack.translatesAutoresizingMaskIntoConstraints = false
     stack.axis = .vertical
+    stack.spacing = 10
     return stack
   }()
   
@@ -102,7 +104,6 @@ class DetailViewController: UIViewController {
     super.viewDidLoad()
     
     newsTitleLabel.text = newsTitle
-//    previewLabel.text = newsText
     likesCountLabel.text = likes
     timestampLabel.text = date
     
@@ -134,11 +135,6 @@ class DetailViewController: UIViewController {
     view.addSubview(scrollView)
     view.addSubview(imageView)
     
-//    view.addSubview(stackView)
-    postView.addSubview(newsTitleLabel)
-    postView.addSubview(previewLabel)
-    postView.addSubview(likesStackView)
-    postView.addSubview(timestampLabel)
   }
   
   func setupScrollView() {
@@ -157,37 +153,41 @@ class DetailViewController: UIViewController {
     // scrollView constraints
     scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    scrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+    scrollView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
     scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    
+    // newsTitleLabel constraints
+    newsTitleLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20).isActive = true
+    newsTitleLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 20).isActive = true
+    newsTitleLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -20).isActive = true
+    
+    // previewLabel constraints
+    previewLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 20).isActive = true
+    previewLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 20).isActive = true
+    previewLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -20).isActive = true
+    
+    // likesStackView constraints
+    likesImageView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 20).isActive = true
+    likesImageView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: -300).isActive = true
+    likesImageView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
+    likesImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    
+    // likesCountLabel constraints
+    likesCountLabel.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 10).isActive = true
+    likesCountLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 70).isActive = true
+    likesCountLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
+    likesCountLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    // timestampLabel constraints
+    timestampLabel.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 10).isActive = true
+    timestampLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -50).isActive = true
+    timestampLabel.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
+    timestampLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
     
     // stackView constraints
     stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
     stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-    stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-    
-    // newsTitleLabel constraints
-    newsTitleLabel.topAnchor.constraint(equalTo: postView.topAnchor, constant: 20).isActive = true
-    newsTitleLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 20).isActive = true
-    newsTitleLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -20).isActive = true
-    
-    // previewLabel constraints
-    previewLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 20).isActive = true
-    previewLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 20).isActive = true
-    previewLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -20).isActive = true
-    
-    // likesStackView constraints
-    likesStackView.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 20).isActive = true
-    likesStackView.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 15).isActive = true
-    likesStackView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    
-    // timestampLabel constraints
-    timestampLabel.topAnchor.constraint(equalTo: previewLabel.bottomAnchor, constant: 20).isActive = true
-    timestampLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -15).isActive = true
-    timestampLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    
-   
+    stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
   }
 }
-
-
